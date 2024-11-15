@@ -6,18 +6,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { GroupInfo } from '@/lib/types';
 import Loading from '@/app/Loading';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 export default function Home() {
   const [dataGroups, setDataGroup] = useState<GroupInfo[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const successToast = (msg: string) => {
-    toast.success(msg, {
-      position: 'top-center',
-    });
-  };
 
   const getDataGroups = useCallback(async () => {
     try {
@@ -40,10 +31,5 @@ export default function Home() {
     getAllData();
   }, [getAllData]);
 
-  return (
-    <>
-      <ToastContainer />
-      {loading ? <Loading /> : <Groups dataGroups={dataGroups} />}
-    </>
-  );
+  return <>{loading ? <Loading /> : <Groups dataGroups={dataGroups} />}</>;
 }
