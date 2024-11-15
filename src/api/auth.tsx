@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { DataToken } from '@/lib/types';
 
-const BASE_URL = 'http://localhost:3001/auth';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API}/auth`;
 
 export const login = async (email: string, password: string): Promise<void> => {
   try {

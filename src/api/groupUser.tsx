@@ -1,7 +1,7 @@
 import { GroupInfo, GroupUserInfo } from '@/lib/types';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/groupusers';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API}/groupusers`;
 
 export const getGroupUsersById = async (groupId: number): Promise<GroupUserInfo[]> => {
   try {

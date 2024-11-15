@@ -1,7 +1,7 @@
 import { TaskInfo } from '@/lib/types';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/tasks';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API}/tasks`;
 
 export const getTasks = async (): Promise<TaskInfo[]> => {
   try {

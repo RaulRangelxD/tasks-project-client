@@ -68,7 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     }
     setAuth(true);
     if (!socket && tokenData) {
-      const socketInstance = io('http://localhost:3001', { auth: { userId: tokenData.id, email: tokenData.email } });
+      const socketInstance = io(`${process.env.NEXT_PUBLIC_API}`, { auth: { userId: tokenData.id, email: tokenData.email } });
       setSocket(socketInstance);
       socketInstance.on('getNotifications', (data) => {
         notify(data);

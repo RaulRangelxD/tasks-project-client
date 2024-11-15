@@ -1,7 +1,7 @@
 import { GroupInfo, UserTaskInfo } from '@/lib/types';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/taskusers';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API}/taskusers`;
 
 export const getTaskUsersById = async (taskId: number): Promise<UserTaskInfo[]> => {
   try {

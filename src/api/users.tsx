@@ -1,7 +1,7 @@
 import { UserInfo } from '@/lib/types';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/users';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API}/users`;
 
 export const getAllUsers = async (): Promise<UserInfo[]> => {
   try {
