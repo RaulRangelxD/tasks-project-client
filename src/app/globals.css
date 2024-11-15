@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-black text-white hover:bg-neutral-900 rounded-md;
+  }
+  .btn-secondary {
+    @apply py-2 px-4 border bg-transparent text-black border-black hover:bg-neutral-500 hover:bg-opacity-25 rounded-md;
+  }
+  .btn-third {
+    @apply py-2 px-4 bg-transparent text-black hover:bg-neutral-500 hover:bg-opacity-25 rounded-md;
+  }
+  .input-form {
+    @apply w-full p-2 text-black bg-white border border-black rounded-md;
+  }
+}
