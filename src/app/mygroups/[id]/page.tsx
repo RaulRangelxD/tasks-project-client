@@ -1,9 +1,9 @@
 'use client'
 
-import { Tasks } from '@/components/tasks/Tasks'
+import { MyTasks } from '@/components/tasks/MyTasks'
 import { getTasksByStatus } from '@/api/tasks'
 import { getGroupUsersByGroupId } from '@/api/groupUser'
-import { getUserById, getUser } from '@/api/users'
+import { getUserById } from '@/api/users'
 import { useCallback, useEffect, useState } from 'react'
 import { TaskInfo, UserInfo } from '@/lib/types'
 import Loading from '@/app/Loading'
@@ -15,7 +15,6 @@ import React from 'react'
 export default function Home({ params }: { params: Promise<{ id: number }> }) {
   const { id: groupId } = React.use(params)
 
-  const [userId, setUserId] = useState<number>(0)
   const [groupUsers, setGroupUsers] = useState<UserInfo[]>([])
   const [tasksPending, setTasksPending] = useState<TaskInfo[]>([])
   const [tasksInProgress, setTasksInProgress] = useState<TaskInfo[]>([])
@@ -28,15 +27,6 @@ export default function Home({ params }: { params: Promise<{ id: number }> }) {
       position: 'top-center',
     })
   }
-
-  const getUserId = useCallback(async () => {
-    try {
-      const result = await getUser()
-      setUserId(result.id)
-    } catch (e) {
-      console.log('error userId', e)
-    }
-  }, [setUserId])
 
   const getAllGroupUsers = useCallback(async () => {
     try {
@@ -82,10 +72,9 @@ export default function Home({ params }: { params: Promise<{ id: number }> }) {
     await getDataPending()
     await getDataInProgress()
     await getDataCompleted()
-    await getUserId()
 
     setLoading(false)
-  }, [getDataPending, getDataInProgress, getDataCompleted, getAllGroupUsers, getUserId])
+  }, [getDataPending, getDataInProgress, getDataCompleted, getAllGroupUsers])
 
   useEffect(() => {
     getAllData()
@@ -97,8 +86,7 @@ export default function Home({ params }: { params: Promise<{ id: number }> }) {
       {loading ? (
         <Loading />
       ) : (
-        <Tasks
-          userId={userId}
+        <MyTasks
           groupId={groupId}
           tasksPending={tasksPending}
           tasksInProgress={tasksInProgress}

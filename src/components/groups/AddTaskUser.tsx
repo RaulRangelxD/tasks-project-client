@@ -1,41 +1,41 @@
-import { useState } from 'react';
-import { useSocket } from '@/components/context/SocketContext';
-import { AddTaskUserProps } from '@/lib/types';
+import { useState } from 'react'
+import { useSocket } from '@/components/context/SocketContext'
+import { AddTaskUserProps } from '@/lib/types'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
 export const AddTaskUser: React.FC<AddTaskUserProps> = ({ groupId, taskId, usersData, getAllData }) => {
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('')
 
-  const socket = useSocket();
+  const socket = useSocket()
 
   const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (socket) {
       try {
-        socket.emit('addTaskUser', { taskId, userId });
+        socket.emit('addTaskUser', { taskId, userId })
 
-        setUserId('');
+        setUserId('')
 
         toast.success('Users added sucessfull', {
           position: 'top-center',
-        });
+        })
       } catch (e) {
         toast.error('Error adding user', {
           position: 'top-center',
-        });
-        console.log('Error adding user: ', e);
+        })
+        console.log('Error adding user: ', e)
       }
-      getAllData();
-      return;
+      getAllData()
+      return
     }
     toast.error('Not logged', {
       position: 'top-center',
-    });
-  };
+    })
+  }
   return (
     <div className='flex-1 flex flex-col items-center justify-center'>
       <ToastContainer />
@@ -55,11 +55,11 @@ export const AddTaskUser: React.FC<AddTaskUserProps> = ({ groupId, taskId, users
           <button type='submit' className='flex-1 btn-primary'>
             Create
           </button>
-          <Link href={`/groups/${groupId}`} className='btn-secondary'>
+          <Link href={`/mygroups/${groupId}`} className='btn-secondary'>
             Back
           </Link>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import { useAuth } from './context/AuthContext';
-import Link from 'next/link';
+import { useAuth } from './context/AuthContext'
+import Link from 'next/link'
 
 export const Nabvar = () => {
-  const { auth } = useAuth();
+  const { auth } = useAuth()
 
   return (
     <>
@@ -10,14 +10,19 @@ export const Nabvar = () => {
         <Link className='btn-third ' href='/'>
           Home
         </Link>
-        <Link className='btn-third' href='/groups'>
-          Groups
-        </Link>
 
         {auth ? (
-          <Link className='btn-third' href='/user'>
-            User
-          </Link>
+          <>
+            <Link className='btn-third' href='/mygroups'>
+              My Groups
+            </Link>
+            <Link className='btn-third' href='/groups'>
+              Groups
+            </Link>
+            <Link className='btn-third' href='/user'>
+              User
+            </Link>
+          </>
         ) : (
           <>
             <Link className='btn-third' href='/login'>
@@ -30,5 +35,5 @@ export const Nabvar = () => {
         )}
       </nav>
     </>
-  );
-};
+  )
+}

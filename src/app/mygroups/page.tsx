@@ -1,8 +1,7 @@
 'use client'
 
-import { Groups } from '@/components/groups/Groups'
-import { getGroupUsersByAuth } from '@/api/groupUser'
-import { getGroupsById } from '@/api/group'
+import { MyGroups } from '@/components/groups/MyGroups'
+import { getGroupsByAuth } from '@/api/group'
 import { useCallback, useEffect, useState } from 'react'
 import { GroupInfo } from '@/lib/types'
 import Loading from '@/app/Loading'
@@ -13,11 +12,8 @@ export default function Home() {
 
   const getDataGroups = useCallback(async () => {
     try {
-      const result = await getGroupUsersByAuth()
-      const groupsIds = result.map((group) => group.groupId)
-
-      const getGroups = await Promise.all(groupsIds.map((groupId) => getGroupsById(groupId)))
-      setDataGroup(getGroups)
+      const result = await getGroupsByAuth()
+      setDataGroup(result)
     } catch (e) {
       console.log('error tasks', e)
     }
@@ -35,5 +31,5 @@ export default function Home() {
     getAllData()
   }, [getAllData])
 
-  return <>{loading ? <Loading /> : <Groups dataGroups={dataGroups} getAllData={getAllData} />}</>
+  return <>{loading ? <Loading /> : <MyGroups dataGroups={dataGroups} getAllData={getAllData} />}</>
 }
